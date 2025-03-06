@@ -1,14 +1,14 @@
-import { useState } from 'react'
-import './App.css'
+import './App.css';
+import ItemListContainer from './components/itemContainer/ItemListContainer.jsx';
+import Navbar from './components/navBar/NavBar.jsx';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function App() {    
   return (
-    <>
-      <h1>Hola</h1>
-    </>
+    <div>
+      <Navbar/>
+      <ItemListContainer greeTings="Bienvenido a " greeTings2="Explora nuestros productos y encuentra lo que más te gusta."/>      
+    </div>
   )
 }
 
-export default App
+export default App;
