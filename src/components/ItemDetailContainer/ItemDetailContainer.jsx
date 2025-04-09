@@ -4,6 +4,7 @@ import { fetchData } from '../../fechData';
 import Spinner from '../spinner/Spinner';
 import { IoArrowBackSharp } from "react-icons/io5";
 import ItemCount from '../ItemCount/ItemCount';
+import ItemDetialImg from '../ItemDetailContainer/ItemDetialImg';
 
 function ItemDetailContainer() {
   const {id} = useParams();
@@ -51,13 +52,7 @@ function ItemDetailContainer() {
           </div>
                 
           <div className='md:w-1/2 md:h-[550px] flex justify-center'>
-            <div className="flex items-center justify-center w-[250px] md:w-[450px] h-[300px] md:h-[500px] bg-gray-200 overflow-hidden relative">
-              <img
-                src={producto.img} 
-                alt="Producto"
-                className="w-full h-full transition-transform duration-300 transform hover:scale-110"
-              />
-            </div>
+            <ItemDetialImg img={producto.img}/>
           </div>
 
           <div className='md:w-1/2 flex flex-col justify-between md:h-[500px]'>
