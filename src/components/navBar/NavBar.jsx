@@ -20,16 +20,16 @@ function Navbar() {
             Inicio
           </Link>
           <li 
-              className='relative cursor-pointer hover:text-[#388da8]'
-              onMouseEnter={() => setNavDropdownOpen(true)}
-            >
-              Productos
+            className='relative cursor-pointer hover:text-[#388da8]'
+            onMouseEnter={() => setNavDropdownOpen(true)}
+          >
+            Productos
           </li>          
         </ul>
       </div>
       
       <div className='w-1/4 md:p-1 md:py-2 flex justify-end text-xl'>
-        <Link to="/carrito">
+        <Link to="/cart">
           <CartWidget/>
         </Link>
       </div>

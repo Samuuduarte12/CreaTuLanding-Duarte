@@ -3,14 +3,40 @@ import { useParams } from 'react-router';
 import { fetchData } from '../../fechData';
 import Spinner from '../spinner/Spinner';
 import Item from '../item/Item';
+import { db } from '../../firebaseConfig';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 
 function ItemListContainer({greeTings, greeTings2}) {
   const {categoria} = useParams();
 
   const [loading, setLoading] = useState(true);
-  const [productos, setProductos] = useState(null);      
+  const [productos, setProductos] = useState(null);  
+  
+  const productosCollection = collection(db, "productos");
+  const ordenesCollection = collection(db, "ordenes");
+    
+  const crearOrden =()=>{
+    const nuevaOrden = {
+      nombre: "samu",
+      telefono: 134,      
+    }
+
+    /* cargar datos a firebase */
+    addDoc(ordenesCollection, nuevaOrden).then(response =>{
+      console.log("Creaste la orden", response.id);
+    })
+  }
+
    
   useEffect(()=>{
+    /* Traer datos de firebase */
+    getDocs(productosCollection).then(snapshot => {
+      let arrayDeProductos = snapshot.docs.map(el => el.data());
+    })
+
+    
+    
+
     if(!productos){
       fetchData()
         .then(response =>{
@@ -32,7 +58,7 @@ function ItemListContainer({greeTings, greeTings2}) {
         <h1 className='text-2xl md:text-5xl pt-4 pb-2 text-gray-700'>
           {greeTings}
           <span className='text-[#388da8]'>TrendyLooks</span>
-        </h1>
+        </h1>        
         <p className='text-sx px-5 md:px-0 md:text-xl text-gray-500'>{greeTings2}</p>
       </div>
 

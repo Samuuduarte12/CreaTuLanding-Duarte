@@ -46,7 +46,7 @@ export const productos = [
     precio: 7000,
     stock: 15,
     descripcion: "Camiseta básica unicolor cuello redondo y silueta justa. Una prenda sencilla e imprescindible en el closet de todo hombre.",
-    img: "https://arturocalle.vtexassets.com/arquivos/ids/578989-800-1067?v=638284189854800000&width=800&height=1067&aspect=true",
+    img: "https://arturocalle.vtexassets.com/arquivos/ids/618980-800-1067?v=638452539260370000&width=800&height=1067&aspect=true",
   },
   {
     id: 6,
@@ -146,7 +146,7 @@ export const productos = [
     precio: 7000,
     stock: 15,
     descripcion: "Gorra plana estilo clásico beisbolero con aplique, perfecta para completar tus looks.",
-    img: "https://arturocalle.vtexassets.com/arquivos/ids/661199-800-1067?v=638634938901170000&width=800&height=1067&aspect=true"
+    img: "https://arturocalle.vtexassets.com/arquivos/ids/710301-800-1067?v=638799031187500000&width=800&height=1067&aspect=true"
   },
   {
     id: 16,

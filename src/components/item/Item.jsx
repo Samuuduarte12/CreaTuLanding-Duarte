@@ -1,17 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router';
+import { useAppContext } from '../../context/context';
 
 function Item({ producto }) {
-
   const { id, img, nombre, precio } = producto;
-
-  function agregarAlCarrito(prod){
-    const nuevoProducto = {
-      ...prod,
-      cantidad: 1,
-    }
-    console.log("agregaste al carrito ", nuevoProducto);
-  }
+  const {agregarAlCarrito, carrito} = useAppContext()  
 
   return (
     <div className="w-[150px] md:w-[250px] relative md:m-[30px_auto] rounded-2xl shadow-xl">      
@@ -40,7 +33,7 @@ function Item({ producto }) {
 
         <div className='flex flex-col md:flex-row justify-center font-semibold gap-2 pb-2 py-1 px-2 md:p-0'>
           <button 
-            onClick={()=> agregarAlCarrito(producto)}
+            onClick={()=> agregarAlCarrito(producto, 1)}
             className='text-[10px] md:w-full md:text-xs text-white bg-gray-700 hover:bg-[#388da8] inline-block md:py-1 md:px-2 rounded-md transition duration-300'
           >
             Agregar al carrito

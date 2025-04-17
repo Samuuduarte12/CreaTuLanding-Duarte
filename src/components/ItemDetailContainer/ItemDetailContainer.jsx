@@ -5,10 +5,11 @@ import Spinner from '../spinner/Spinner';
 import { IoArrowBackSharp } from "react-icons/io5";
 import ItemCount from '../ItemCount/ItemCount';
 import ItemDetialImg from '../ItemDetailContainer/ItemDetialImg';
+import { useAppContext } from '../../context/context';
 
 function ItemDetailContainer() {
   const {id} = useParams();
-
+  const {agregarAlCarrito} = useAppContext();
   const [loading, setLoading] = useState(true);
   const [producto, setProducto] = useState(null);
   const [contador, setContador] = useState(1);
@@ -23,16 +24,7 @@ function ItemDetailContainer() {
       }, 500);
     })
     .catch(error => console.error(error));
-  },[])  
-
-  function agregarAlCarrito(prod){
-    const nuevoProducto = {
-      ...prod,
-      cantidad: contador
-    };
-    console.log("Vas a agregar ", nuevoProducto);
-    setContador(1);
-  }
+  },[])    
 
   return (
     loading ? 
@@ -81,7 +73,7 @@ function ItemDetailContainer() {
 
               <div className='w-full'>
                 <button
-                  onClick={()=> agregarAlCarrito(producto)}
+                  onClick={()=> agregarAlCarrito(producto, contador)}
                   className='text-white bg-gray-700 hover:bg-[#388da8] font-semibold w-full py-2 px-2 rounded-md transition duration-300'
                 >
                   Agregar al carrito
