@@ -5,7 +5,7 @@ import ItemListContainer from './components/itemListContainer/ItemListContainer.
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer.jsx';
 import Page404 from './components/404/Page404.jsx';
 import { ContextProvider } from './context/context.jsx';
-import Cart from './components/cart/Cart.js';
+import Cart from './components/cart/Cart.jsx';
 
 function App() {
   return (

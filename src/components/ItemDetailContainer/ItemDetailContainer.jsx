@@ -11,6 +11,7 @@ function ItemDetailContainer() {
   const {id} = useParams();
   const {agregarAlCarrito} = useAppContext();
   const [loading, setLoading] = useState(true);
+  const [mostrarCount, setMostrarCount] = useState(true);
   const [producto, setProducto] = useState(null);
   const [contador, setContador] = useState(1);
 
@@ -25,6 +26,11 @@ function ItemDetailContainer() {
     })
     .catch(error => console.error(error));
   },[])    
+
+  const ocultarCount = (producto, contador) =>{
+    agregarAlCarrito(producto, contador);
+    setMostrarCount(false)
+  }
 
   return (
     loading ? 
@@ -62,18 +68,20 @@ function ItemDetailContainer() {
             <p className='text-sm md:text-base font-normal md:pb-10 md:py-8 '>{producto.descripcion}</p>
 
             <div className='flex flex-col items-start gap-5 py-5 md:px-2 border-t border-gray-200'>
-              <div className='flex gap-2 md:gap-10 items-center'>
-                <ItemCount
-                  stock={producto.stock}
-                  contador={contador}
-                  setContador={setContador}
-                />
-                <p className='text-[#388da8] font-medium'>Quedan {producto.stock} disponibles</p>
-              </div>
+              {mostrarCount &&
+                <div className='flex gap-2 md:gap-10 items-center'>
+                  <ItemCount
+                    stock={producto.stock}
+                    contador={contador}
+                    setContador={setContador}
+                  />
+                  <p className='text-[#388da8] font-medium'>Quedan {producto.stock} disponibles</p>
+                </div>              
+              }
 
               <div className='w-full'>
                 <button
-                  onClick={()=> agregarAlCarrito(producto, contador)}
+                  onClick={()=> ocultarCount(producto, contador)}
                   className='text-white bg-gray-700 hover:bg-[#388da8] font-semibold w-full py-2 px-2 rounded-md transition duration-300'
                 >
                   Agregar al carrito

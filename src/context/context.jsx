@@ -32,7 +32,7 @@ export const ContextProvider = (props) => {
     }
 
     return(
-        <AppContext.Provider value={{agregarAlCarrito, carrito}}>
+        <AppContext.Provider value={{agregarAlCarrito, carrito, setCarrito}}>
             {props.children}
         </AppContext.Provider>
     )
