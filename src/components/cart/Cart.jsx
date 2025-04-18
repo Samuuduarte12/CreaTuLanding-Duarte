@@ -1,5 +1,6 @@
 import React from 'react'
 import { useAppContext } from '../../context/context'
+import { Link } from 'react-router';
 
 function Cart() {
   const { carrito, setCarrito } = useAppContext()
@@ -13,7 +14,7 @@ function Cart() {
     return carrito.reduce((acc, prod) => acc + prod.precio * prod.cantidad, 0);
   }
 
-  function calcularSubTotal(carro) {
+  function calcularTotalPorProducto(carro) {
     let subTotal = 0;
     subTotal += carro.cantidad * carro.precio;
     return subTotal.toLocaleString('es-CL');
@@ -34,10 +35,9 @@ function Cart() {
   return (
     carrito.length > 0 ?
       <div className='mt-20 bg-white'>
-        <h1 className='text-sx text-center px-5 md:px-0 md:text-xl text-gray-700 font-bold m-5'>Productos del carrito</h1>
+        <h1 className='text-sx text-center px-5 md:px-0 md:text-2xl text-gray-700 font-bold m-5'>Productos en tu carrito</h1>
 
-        <div className='flex flex-col-reverse md:flex-row-reverse items-center md:px-10'>
-
+        <div className='flex flex-col-reverse md:flex-row-reverse items-center md:px-10'>          
           {/* Resumen */}
           <div className='w-full bottom-0 md:w-2/6 fixed md:top-24 md:right-10 md:h-fit md:z-50 bg-white shadow-2xl rounded-xl md:mt-10'>
             <h1 className='text-lg p-4 border-b border-gray-300'>Resumen de compra</h1>
@@ -57,79 +57,77 @@ function Cart() {
           </div>
 
           {/* Productos */}
-          <div className='w-full md:w-3/4 md:mr-[34%] mb-52 md:mb-10'>
-            <div className='flex flex-col items-center justify-center p-1 gap-3'>
-              {carrito.map((carro) => (
-                <div key={carro.id} className='flex items-center gap-2 bg-white shadow-xl p-2 w-full md:w-3/4 rounded-2xl'>
+          <div className='w-full md:w-3/4 md:mr-[34%] mb-80 md:mb-10'>
+            <div className='flex flex-col items-center justify-center p-1 md:p-1 gap-3'>
+              <div className='w-full md:w-5/6 py-3 rounded-xl shadow-xl'>                
+                {carrito.map((carro) => (
+                  <div key={carro.id} className='flex items-center gap-2 bg-white p-4 w-full border-b border-gray-300'>
+                    <Link
+                      to={`/detalle/${carro.id}`}
+                    >
+                      <div className="flex-shrink-0 h-[100px] w-[100px] md:h-[120px] md:w-[120px]">
+                        <img
+                          src={carro.img}
+                          alt="Producto"
+                          className="w-full h-full rounded-md object-cover"
+                        />
+                      </div>
+                    </Link>
+                    
+                    <div className='flex flex-col w-[calc(100%-120px)]'>                    
+                      <div className='flex flex-col md:flex-row md:items-center justify-between md:h-[90px] w-full gap-2'>
+                        <Link
+                          to={`/detalle/${carro.id}`}
+                          className='text-sm md:text-lg font-semibold'
+                        >                          
+                          {carro.nombre}                          
+                        </Link>
 
-                  {/* Imagen */}
-                  <div className="flex-shrink-0 h-[100px] w-[100px] md:h-[120px] md:w-[120px]">
-                    <img
-                      src={carro.img}
-                      alt="Producto"
-                      className="w-full h-full rounded-md object-cover"
-                    />
-                  </div>
-
-                  {/* Contenido */}
-                  <div className='flex flex-col w-[calc(100%-120px)]'>
-
-                    {/* Nombre, Cantidad, Subtotal */}
-                    <div className='flex flex-col md:flex-row md:items-center justify-between md:h-[90px] w-full gap-2'>
-                      <h1 className='text-sm md:text-lg font-semibold'>
-                        {carro.nombre}
-                      </h1>
-
-                      <div className='flex items-center gap-1 md:gap-3'>
-                        <h2 className='text-xs md:text-base'>Cantidad:</h2>
-                        <div className='flex items-center border border-gray-300 rounded'>
-                          <button
-                            onClick={() => modificarCantidad(carro.id, 'restar')}
-                            className='px-2 border-r border-gray-300'
-                          >
-                            -
-                          </button>
-                          <span className='px-2'>{carro.cantidad}</span>
-                          <button
-                            onClick={() => modificarCantidad(carro.id, 'sumar')}
-                            className='px-2 border-l border-gray-300'
-                          >
-                            +
-                          </button>
+                        <div className='flex items-center gap-1 md:gap-3'>
+                          <h2 className='text-xs md:text-base'>Cantidad:</h2>
+                          <div className='flex items-center border border-gray-300 rounded'>
+                            <button
+                              onClick={() => modificarCantidad(carro.id, 'restar')}
+                              className='px-2 border-r border-gray-300'
+                            >
+                              -
+                            </button>
+                            <span className='px-2'>{carro.cantidad}</span>
+                            <button
+                              onClick={() => modificarCantidad(carro.id, 'sumar')}
+                              className='px-2 border-l border-gray-300'
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                        
+                        <div className='text-xs md:text-xl font-bold text-[#388da8]'>
+                          ${calcularTotalPorProducto(carro)}
                         </div>
                       </div>
-
-                      {/* Subtotal */}
-                      <div className='text-xs md:text-xl font-bold text-[#388da8]'>
-                        ${calcularSubTotal(carro)}
+                      
+                      <div className='flex justify-end mt-1'>
+                        <button
+                          onClick={() => eliminarDelCarrito(carro.id)}
+                          className='text-red-500 hover:text-red-700 font-semibold text-sm md:text-base'
+                        >
+                          Eliminar
+                        </button>
                       </div>
-
                     </div>
-
-                    {/* Eliminar */}
-                    <div className='flex justify-end mt-1'>
-                      <button
-                        onClick={() => eliminarDelCarrito(carro.id)}
-                        className='text-red-500 hover:text-red-700 font-semibold text-sm md:text-base'
-                      >
-                        Eliminar
-                      </button>
-                    </div>
-
                   </div>
-
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
-
         </div>
       </div>
-      :
+    :
       <div className='mt-20 text-center text-gray-500 text-lg'>
-        No hay productos en el carrito
+        <h1 className='text-sx text-center px-5 md:px-0 md:text-2xl text-gray-700 font-bold m-5'>El carrio esta vacio</h1>
       </div>
   )
 }
 
-export default Cart
+export default Cart;

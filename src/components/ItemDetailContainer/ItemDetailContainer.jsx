@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { fetchData } from '../../fechData';
 import Spinner from '../spinner/Spinner';
 import { IoArrowBackSharp } from "react-icons/io5";
@@ -9,6 +9,7 @@ import { useAppContext } from '../../context/context';
 
 function ItemDetailContainer() {
   const {id} = useParams();
+  const navigate = useNavigate();
   const {agregarAlCarrito} = useAppContext();
   const [loading, setLoading] = useState(true);
   const [mostrarCount, setMostrarCount] = useState(true);
@@ -37,9 +38,9 @@ function ItemDetailContainer() {
       <Spinner/>
     :   
     <div className='mt-20 md:pt-14 md:mt-8 px-4'>
-      <Link to="/" className='text-2xl'>
+      <button onClick={() => navigate(-1)} className='text-2xl'>
         <IoArrowBackSharp/>
-      </Link>
+      </button>
       {producto ?
         <div className="md:pt-5 bg-whie flex flex-col md:flex-row px-5 md:px-20">
           {/* Solo se ve en mobile */}
