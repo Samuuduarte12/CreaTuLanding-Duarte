@@ -7,7 +7,19 @@ function Cart() {
   function eliminarDelCarrito(id) {
     const newCarrito = carrito.filter(producto => producto.id !== id);
     setCarrito(newCarrito);
+  }  
+
+  function calcularTotalCarrito() {
+    return carrito.reduce((acc, prod) => acc + prod.precio * prod.cantidad, 0);
   }
+
+  function calcularSubTotal(carro){    
+    let subTotal = 0;
+    subTotal += carro.cantidad * carro.precio;    
+    
+    return subTotal.toLocaleString('es-CL');
+  }
+  
   
   return (        
     carrito.length > 0 ?
@@ -32,8 +44,13 @@ function Cart() {
                     </div>
 
                     <div className=' flex items-center justify-center w-1/6'>
-                      <h2 className='font-semibold text-xl text-[#388da8]'>${carro.precio}</h2>                  
-                    </div>                                                                                
+                      <h2 className='font-semibold text-xl text-[#388da8]'>
+                        ${carro.precio.toLocaleString('es-CL')}
+                      </h2>                  
+                    </div>                                        
+                    <div className='text-xl font-bold text-center mt-5'>                      
+                      Total: ${calcularSubTotal(carro)}
+                    </div>                                                                                                   
                   </div>                  
 
                   <div className='flex justify-end px-4'>
@@ -48,6 +65,9 @@ function Cart() {
               </div>              
             )
           })}
+          <div className='text-xl font-bold text-center mt-5'>                      
+            ${calcularTotalCarrito().toLocaleString('es-CL')}
+          </div> 
         </div>
       </div>    
       :

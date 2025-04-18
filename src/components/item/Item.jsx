@@ -28,7 +28,7 @@ function Item({ producto }) {
         </h4>        
                   
         <div className="overflow-hidden border-t border-[#eee] md:py-[8px]">
-          <h2 className="text-sm md:text-[18px] font-semibold text-[#388da8]">${precio}</h2>
+          <h2 className="text-sm md:text-[18px] font-semibold text-[#388da8]">${precio.toLocaleString('es-CL')}</h2>
         </div>
 
         <div className='flex flex-col md:flex-row justify-center font-semibold gap-2 pb-2 py-1 px-2 md:p-0'>

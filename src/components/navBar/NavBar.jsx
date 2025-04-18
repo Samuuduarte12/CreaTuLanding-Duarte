@@ -23,7 +23,7 @@ function Navbar() {
             className='relative cursor-pointer hover:text-[#388da8]'
             onMouseEnter={() => setNavDropdownOpen(true)}
           >
-            Productos
+            Categorias
           </li>          
         </ul>
       </div>

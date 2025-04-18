@@ -59,7 +59,7 @@ function ItemDetailContainer() {
                 {producto.nombre}
               </h1>
               <p className='text-gray-400'>Categoria: {producto.categoria}</p>
-              <h2 className='text-3xl py-3 md:py-5 font-medium text-[#388da8]'>${producto.precio}</h2>
+              <h2 className='text-3xl py-3 md:py-5 font-medium text-[#388da8]'>${producto.precio.toLocaleString('es-CL')}</h2>
             </div>
             
             <h3 className='text-lg md:text-xl text-start py-2 border-b border-gray-300 font-medium'>
