@@ -6,7 +6,7 @@ const NavDropdownOpen = ({setNavDropdownOpen}) => {
     <div className="absolute left-0 top-full w-full bg-white shadow-md py-3 z-20 flex justify-center"
         onMouseLeave={()=> setNavDropdownOpen(false)}
     >
-        <div className="flex gap-10 text-gray-700" style={{ fontFamily: 'Poppins' }}>
+        <div className="flex flex-wrap  md:gap-10 text-gray-700" style={{ fontFamily: 'Poppins' }}>
             <Link to="/categoria/camperas" className='hover:text-[#388da8] px-4 py-2'>
               Camperas
             </Link>
