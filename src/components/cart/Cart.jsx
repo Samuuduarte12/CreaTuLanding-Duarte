@@ -1,6 +1,8 @@
 import React from 'react'
 import { useAppContext } from '../../context/context'
 import { Link } from 'react-router';
+import { FaShoppingCart } from "react-icons/fa";
+import ItemCount from '../ItemCount/ItemCount';
 
 function Cart() {
   const { carrito, setCarrito } = useAppContext()
@@ -21,6 +23,8 @@ function Cart() {
   }
 
   function modificarCantidad(id, operacion) {
+    console.log("el id",id);
+    
     const newCarrito = carrito.map(producto => {
       if (producto.id === id) {
         let nuevaCantidad = operacion === 'sumar' ? producto.cantidad + 1 : producto.cantidad - 1;
@@ -35,7 +39,7 @@ function Cart() {
   return (
     carrito.length > 0 ?
       <div className='mt-20 bg-white'>
-        <h1 className='text-sx text-center px-5 md:px-0 md:text-2xl text-gray-700 font-bold m-5'>Productos en tu carrito</h1>
+        <h1 className='text-sx text-center px-5 md:px-0 md:text-3xl text-gray-700 font-semibold m-5'>Carrito</h1>
 
         <div className='flex flex-col-reverse md:flex-row-reverse items-center md:px-10'>          
           {/* Resumen */}
@@ -85,21 +89,7 @@ function Cart() {
 
                         <div className='flex items-center gap-1 md:gap-3'>
                           <h2 className='text-xs md:text-base'>Cantidad:</h2>
-                          <div className='flex items-center border border-gray-300 rounded'>
-                            <button
-                              onClick={() => modificarCantidad(carro.id, 'restar')}
-                              className='px-2 border-r border-gray-300'
-                            >
-                              -
-                            </button>
-                            <span className='px-2'>{carro.cantidad}</span>
-                            <button
-                              onClick={() => modificarCantidad(carro.id, 'sumar')}
-                              className='px-2 border-l border-gray-300'
-                            >
-                              +
-                            </button>
-                          </div>
+                          <ItemCount carro={carro} setCarrito={setCarrito} carrito={carrito}/>                          
                         </div>
                         
                         <div className='text-xs md:text-xl font-bold text-[#388da8]'>
@@ -110,7 +100,7 @@ function Cart() {
                       <div className='flex justify-end mt-1'>
                         <button
                           onClick={() => eliminarDelCarrito(carro.id)}
-                          className='text-red-500 hover:text-red-700 font-semibold text-sm md:text-base'
+                          className='text-red-500 hover:text-red-700 font-semibold text-sm md:text-base cursor-pointer'
                         >
                           Eliminar
                         </button>
@@ -124,8 +114,9 @@ function Cart() {
         </div>
       </div>
     :
-      <div className='mt-20 text-center text-gray-500 text-lg'>
-        <h1 className='text-sx text-center px-5 md:px-0 md:text-2xl text-gray-700 font-bold m-5'>El carrio esta vacio</h1>
+      <div className='flex flex-col justify-center items-center text-center text-gray-300 text-lg h-screen'>
+        <FaShoppingCart className='text-5xl md:text-8xl'/>
+        <h1 className='text-sx text-center px-5 md:px-0 md:text-2xl text-gray-700 font-bold m-5'>Tu carrito esta vacio</h1>
       </div>
   )
 }

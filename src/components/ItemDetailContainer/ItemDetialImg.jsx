@@ -17,7 +17,7 @@ const ItemDetialImg = ({img}) => {
             <img
                 src={img}
                 alt="Producto"
-                className="w-full h-full transition-transform duration-300 transform hover:scale-110"
+                className="w-full h-full transition-transform duration-300 transform md:hover:scale-110"
             />
         </div>
         <div 
@@ -41,7 +41,7 @@ const ItemDetialImg = ({img}) => {
                         top: `${zoomPosition.y}%`,
                         transform: "translate(-50%, -50%)",
                         backgroundImage: `url(${img})`,
-                        backgroundSize: "600%",
+                        backgroundSize: "800%",
                         backgroundPosition: `${zoomPosition.x}% ${zoomPosition.y}%`
                     }}
                 />
@@ -51,4 +51,4 @@ const ItemDetialImg = ({img}) => {
   )
 }
 
-export default ItemDetialImg
+export default ItemDetialImg;

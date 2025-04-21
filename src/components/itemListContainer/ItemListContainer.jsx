@@ -1,55 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router';
-import { fetchData } from '../../fechData';
 import Spinner from '../spinner/Spinner';
 import Item from '../item/Item';
 import { db } from '../../firebaseConfig';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection} from 'firebase/firestore';
+import { useAppContext} from '../../context/context';
+import Notification from '../notification/Notification';
 
 function ItemListContainer({greeTings, greeTings2}) {
-  const {categoria} = useParams();
-
-  const [loading, setLoading] = useState(true);
-  const [productos, setProductos] = useState(null);  
-  
-  const productosCollection = collection(db, "productos");
-  const ordenesCollection = collection(db, "ordenes");
+  const {categoria} = useParams();  
+  const {productos, loading, notif, mensajeNotification} = useAppContext();
+  const ordenesCollection = collection(db, "ordenes");    
     
   const crearOrden =()=>{
     const nuevaOrden = {
       nombre: "samu",
-      telefono: 134,      
+      telefono: 134,
     }
 
     /* cargar datos a firebase */
     addDoc(ordenesCollection, nuevaOrden).then(response =>{
       console.log("Creaste la orden", response.id);
     })
-  }
-
-   
-  useEffect(()=>{
-    /* Traer datos de firebase */
-    getDocs(productosCollection).then(snapshot => {
-      let arrayDeProductos = snapshot.docs.map(el => el.data());
-    })
-
+  }   
     
-    
-
-    if(!productos){
-      fetchData()
-        .then(response =>{
-          setProductos(response);
-          setTimeout(() => {
-            setLoading(false);
-          }, 500);
-        })
-        .catch(error =>console.log(error));
-    }
-  },[categoria]);
-  
-
   return (
     loading ? <Spinner />
     :
@@ -68,7 +42,8 @@ function ItemListContainer({greeTings, greeTings2}) {
             return (
               <Item
                 key={producto.id}
-                producto={producto}                
+                producto={producto}
+                onNotify={mensajeNotification}            
               />
             )
           })
@@ -77,12 +52,14 @@ function ItemListContainer({greeTings, greeTings2}) {
             return (
               <Item
                 key={producto.id}
-                producto={producto}                
+                producto={producto}
+                onNotify={mensajeNotification}          
               />
             )
           })
         } 
-      </div>        
+      </div>
+      <Notification message={notif.message} show={notif.show}/>
     </div>
   )
 }

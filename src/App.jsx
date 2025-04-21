@@ -7,7 +7,7 @@ import Page404 from './components/404/Page404.jsx';
 import { ContextProvider } from './context/context.jsx';
 import Cart from './components/cart/Cart.jsx';
 
-function App() {
+function App() {            
   return (
     <ContextProvider>
       <BrowserRouter>
@@ -16,14 +16,14 @@ function App() {
           <Route path='/' element={
               <ItemListContainer
                 greeTings="Bienvenido a "
-                greeTings2="Explora nuestros productos y encuentra lo que más te gusta."
+                greeTings2="Explora nuestros productos y encuentra lo que más te gusta."                
               />
             }
           />
           <Route path='/categoria/:categoria' element={
               <ItemListContainer
                 greeTings="Bienvenido a "
-                greeTings2="Explora nuestros productos y encuentra lo que más te gusta."
+                greeTings2="Explora nuestros productos y encuentra lo que más te gusta."                
               />
             }
           />
