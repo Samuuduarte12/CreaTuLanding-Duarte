@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAppContext } from '../../context/context'
 import { Link } from 'react-router';
-import { FaShoppingCart } from "react-icons/fa";
 import ItemCount from '../ItemCount/ItemCount';
+import FormBuy from '../formBuy/FormBuy';
+import { FaShoppingCart } from "react-icons/fa";
 
 function Cart() {
   const { carrito, setCarrito } = useAppContext()
+  const [modalOpen, setModalOpen] = useState(false);
 
   function eliminarDelCarrito(id) {
     const newCarrito = carrito.filter(producto => producto.id !== id);
@@ -13,27 +15,14 @@ function Cart() {
   }
 
   function calcularTotalCarrito() {
-    return carrito.reduce((acc, prod) => acc + prod.precio * prod.cantidad, 0);
+    const total = carrito.reduce((acc, prod) => acc + prod.precio * prod.cantidad, 0);
+    return total.toLocaleString('es-CL');
   }
 
   function calcularTotalPorProducto(carro) {
     let subTotal = 0;
     subTotal += carro.cantidad * carro.precio;
     return subTotal.toLocaleString('es-CL');
-  }
-
-  function modificarCantidad(id, operacion) {
-    console.log("el id",id);
-    
-    const newCarrito = carrito.map(producto => {
-      if (producto.id === id) {
-        let nuevaCantidad = operacion === 'sumar' ? producto.cantidad + 1 : producto.cantidad - 1;
-        if (nuevaCantidad < 1) nuevaCantidad = 1;
-        return { ...producto, cantidad: nuevaCantidad };
-      }
-      return producto;
-    });
-    setCarrito(newCarrito);
   }
 
   return (
@@ -47,14 +36,16 @@ function Cart() {
             <h1 className='text-lg p-4 border-b border-gray-300'>Resumen de compra</h1>
             <div className='flex justify-between items-center p-4'>
               <h3>Productos ({carrito.length})</h3>
-              <p>${calcularTotalCarrito().toLocaleString('es-CL')}</p>
+              <p>${calcularTotalCarrito()}</p>
             </div>
             <div className='text-xl font-semibold text-center mt-5 flex gap-2 p-4 text-[#388da8]'>
               <h2>Total: </h2>
-              <p>${calcularTotalCarrito().toLocaleString('es-CL')}</p>
+              <p>${calcularTotalCarrito()}</p>
             </div>
             <div className='p-5'>
-              <button className='w-full text-white bg-gray-700 hover:bg-[#388da8] inline-block py-3 rounded-md transition duration-300'>
+              <button 
+                onClick={() => setModalOpen(true)}
+                className='w-full text-white bg-gray-700 hover:bg-[#388da8] inline-block py-3 rounded-md transition duration-300'>
                 Realizar Compra
               </button>
             </div>
@@ -106,6 +97,13 @@ function Cart() {
                         </button>
                       </div>
                     </div>
+                    {modalOpen && <
+                      FormBuy                        
+                        calcularTotalCarrito={calcularTotalCarrito} 
+                        setModalOpen={setModalOpen}
+                        calcularTotalPorProducto={calcularTotalPorProducto}
+                      />
+                    }
                   </div>
                 ))}
               </div>

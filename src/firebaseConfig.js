@@ -1,14 +1,17 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
+const {VITE_API_KEY, VITE_AUTH_DOMAIN, VITE_PROJECT_ID, VITE_STORAGE_BUCKET, VITE_MESSAGING_SENDER_ID,
+  VITE_APP_ID, VITE_MEASUREMENT_ID} = import.meta.env;
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDcMo1rQtxRQ86fD_zB8DNT3TPlv2j3AZ8",
-  authDomain: "arte-vivo-775a1.firebaseapp.com",
-  projectId: "arte-vivo-775a1",
-  storageBucket: "arte-vivo-775a1.firebasestorage.app",
-  messagingSenderId: "1074045171776",
-  appId: "1:1074045171776:web:5f95f32eb58a40a00487a5",
-  measurementId: "G-0J82PCHK7G"
+  apiKey: VITE_API_KEY,
+  authDomain: VITE_AUTH_DOMAIN,
+  projectId: VITE_PROJECT_ID,
+  storageBucket: VITE_STORAGE_BUCKET,
+  messagingSenderId: VITE_MESSAGING_SENDER_ID,
+  appId: VITE_APP_ID,
+  measurementId: VITE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);

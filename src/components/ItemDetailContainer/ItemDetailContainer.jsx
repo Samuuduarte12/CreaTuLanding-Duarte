@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import { useAppContext } from '../../context/context';
-import { IoArrowBackSharp } from "react-icons/io5";
 import Spinner from '../spinner/Spinner';
-import ItemCount from '../ItemCount/ItemCount';
+import { IoArrowBackSharp } from "react-icons/io5";
 import ItemDetialImg from '../ItemDetailContainer/ItemDetialImg';
+import ItemCount from '../ItemCount/ItemCount';
 import Notification from '../notification/Notification';
 
 function ItemDetailContainer() {

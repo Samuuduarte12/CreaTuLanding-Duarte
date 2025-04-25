@@ -1,31 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router';
+import { useAppContext} from '../../context/context';
 import Spinner from '../spinner/Spinner';
 import Item from '../item/Item';
-import { db } from '../../firebaseConfig';
-import { addDoc, collection} from 'firebase/firestore';
-import { useAppContext} from '../../context/context';
 import Notification from '../notification/Notification';
 
 function ItemListContainer({greeTings, greeTings2}) {
   const {categoria} = useParams();  
-  const {productos, loading, notif, mensajeNotification} = useAppContext();
-  const ordenesCollection = collection(db, "ordenes");    
-    
-  const crearOrden =()=>{
-    const nuevaOrden = {
-      nombre: "samu",
-      telefono: 134,
-    }
-
-    /* cargar datos a firebase */
-    addDoc(ordenesCollection, nuevaOrden).then(response =>{
-      console.log("Creaste la orden", response.id);
-    })
-  }   
+  const {productos, loading, notif, mensajeNotification} = useAppContext();        
     
   return (
-    loading ? <Spinner />
+    loading ? 
+      <div className='md:mt-10 bg-white min-h-screen flex justify-center items-center'>
+        <Spinner />
+      </div>
     :
     <div className='bg-white min-h-screen text-center md:mt-10 md:p-5 relative'>
       <div className='py-20 font-bold'>
@@ -57,7 +45,7 @@ function ItemListContainer({greeTings, greeTings2}) {
               />
             )
           })
-        } 
+        }
       </div>
       <Notification message={notif.message} show={notif.show}/>
     </div>

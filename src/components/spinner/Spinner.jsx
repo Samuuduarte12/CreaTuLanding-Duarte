@@ -3,7 +3,7 @@ import '../spinner/spinner.css'
 
 function Spinner() {
   return (
-    <div className='md:mt-10 bg-white min-h-screen flex justify-center items-center'>
+    <div>
       <span className="loader"></span>
     </div>
   )

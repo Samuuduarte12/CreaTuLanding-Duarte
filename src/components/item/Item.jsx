@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router';
 import { useAppContext } from '../../context/context';
+import { Link } from 'react-router';
 
 function Item({ producto, onNotify}) {
-  const {id,img, nombre, precio } = producto;
-  const {agregarAlCarrito} = useAppContext()  
+  const {id, img, nombre, precio } = producto;
+  const {agregarAlCarrito} = useAppContext()
   const [loading, setLoading] = useState(false);
 
   const handleAgregar = () => {
@@ -47,11 +47,14 @@ function Item({ producto, onNotify}) {
         <button
             onClick={handleAgregar}
             disabled={loading}
-            className={`text-[10px] md:w-full md:text-xs text-white ${
-              loading ? 'bg-gray-400' : 'bg-gray-700 hover:bg-[#388da8]'
-            } inline-block md:py-1 md:px-2 rounded-md transition duration-300 cursor-pointer`}
+            className="text-[10px] md:w-full md:text-xs text-white bg-gray-700 hover:bg-[#388da8] md:px-2 inline-block md:py-1 rounded-md transition duration-300 cursor-pointer"
           >
-            {loading ? 'Agregando...' : 'Agregar al carrito'}
+            {loading ? 
+              <div>
+                <span className="loader2"></span>
+              </div> 
+            : 
+              'Agregar al carrito'}
           </button>         
         </div>
       </div>      

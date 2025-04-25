@@ -1,11 +1,11 @@
 import './App.css';
+import { ContextProvider } from './context/context.jsx';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import Navbar from './components/navBar/NavBar.jsx';
 import ItemListContainer from './components/itemListContainer/ItemListContainer.jsx';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer.jsx';
-import Page404 from './components/404/Page404.jsx';
-import { ContextProvider } from './context/context.jsx';
 import Cart from './components/cart/Cart.jsx';
+import Page404 from './components/404/Page404.jsx';
 
 function App() {            
   return (

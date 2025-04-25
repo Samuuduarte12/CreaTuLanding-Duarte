@@ -47,7 +47,7 @@ export const ContextProvider = (props) => {
             setTimeout(() => {
               setLoading(false);
             }, 500);
-            console.log("trajo productos:")
+            console.log("trajo productos:", arrayDeProductos)
           })
           .catch(error => console.log(error));
         }
