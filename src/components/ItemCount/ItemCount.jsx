@@ -2,7 +2,7 @@ import React from 'react'
 
 function ItemCount({stock, contador, setContador, carro, setCarrito, carrito}){  
   
-  function modificarContador(id, operacion){    
+  function modificarContador(id, operacion){
     if(id){
       const newCarrito = carrito.map(producto => {
         if(producto.id === id){

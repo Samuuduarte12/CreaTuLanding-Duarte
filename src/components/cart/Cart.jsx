@@ -6,25 +6,14 @@ import FormBuy from '../formBuy/FormBuy';
 import { FaShoppingCart } from "react-icons/fa";
 
 function Cart() {
-  const { carrito, setCarrito } = useAppContext()
+  const { carrito, setCarrito, calcularTotalPorProducto,  calcularTotalCarrito} = useAppContext()
   const [modalOpen, setModalOpen] = useState(false);
 
   function eliminarDelCarrito(id) {
     const newCarrito = carrito.filter(producto => producto.id !== id);
     setCarrito(newCarrito);
   }
-
-  function calcularTotalCarrito() {
-    const total = carrito.reduce((acc, prod) => acc + prod.precio * prod.cantidad, 0);
-    return total.toLocaleString('es-CL');
-  }
-
-  function calcularTotalPorProducto(carro) {
-    let subTotal = 0;
-    subTotal += carro.cantidad * carro.precio;
-    return subTotal.toLocaleString('es-CL');
-  }
-
+  
   return (
     carrito.length > 0 ?
       <div className='mt-20 bg-white'>
@@ -80,7 +69,7 @@ function Cart() {
 
                         <div className='flex items-center gap-1 md:gap-3'>
                           <h2 className='text-xs md:text-base'>Cantidad:</h2>
-                          <ItemCount carro={carro} setCarrito={setCarrito} carrito={carrito}/>                          
+                          <ItemCount carro={carro} setCarrito={setCarrito} carrito={carrito}/>
                         </div>
                         
                         <div className='text-xs md:text-xl font-bold text-[#388da8]'>

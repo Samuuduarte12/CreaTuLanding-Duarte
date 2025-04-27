@@ -3,16 +3,21 @@ import { useAppContext } from '../../context/context';
 import { Link } from 'react-router';
 
 function Item({ producto, onNotify}) {
-  const {id, img, nombre, precio } = producto;
+  const {id, img, nombre, precio, stock } = producto;
   const {agregarAlCarrito} = useAppContext()
   const [loading, setLoading] = useState(false);
 
   const handleAgregar = () => {
     setLoading(true);
     setTimeout(() => {
-      agregarAlCarrito(producto, 1);
-      setLoading(false);
-      onNotify('Producto agregado al carrito');
+      if(stock > 0 ){
+        agregarAlCarrito(producto, 1);
+        setLoading(false);
+        onNotify('Producto agregado al carrito');
+      }else{
+        setLoading(false);
+        onNotify('Producto sin stock');
+      }
     }, 800);
   };
 
@@ -29,7 +34,7 @@ function Item({ producto, onNotify}) {
       </Link>
 
       <div className="absolute top-4 uppercase text-[10px] md:text-[13px] font-semibold bg-[#388da8] text-white md:py-[3px] px-1  md:px-2.5  rounded-r-2xl">
-        En Stock
+        {stock > 0 ? "En Stock" : "Sin Stock"}
       </div>
 
       <div className="md:p-2.5 pt-0 bg-white rounded-b-2xl">        

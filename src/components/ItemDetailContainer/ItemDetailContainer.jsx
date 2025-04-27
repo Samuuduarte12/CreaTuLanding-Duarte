@@ -27,12 +27,17 @@ function ItemDetailContainer() {
   }, [productos, id]);
 
   const ocultarCount = (producto, contador) =>{
-    setMostrarCount(false);
     setLoadingNotify(true);
-    setTimeout(() => {      
-      agregarAlCarrito(producto, contador);
-      setLoadingNotify(false);
-      mensajeNotification('Producto agregado al carrito');
+    setTimeout(() => {
+      if (producto.stock > 0) {        
+        setMostrarCount(false);
+        agregarAlCarrito(producto, contador);
+        setLoadingNotify(false);
+        mensajeNotification('Producto agregado al carrito');
+      }else{
+        setLoadingNotify(false);
+        mensajeNotification('Producto sin stock');
+      }     
     }, 800);
   }  
   
@@ -78,7 +83,7 @@ function ItemDetailContainer() {
                     contador={contador}
                     setContador={setContador}
                   />
-                  <p className='text-[#388da8] font-medium'>Quedan {producto.stock} disponibles</p>
+                  <p className='text-[#388da8] font-medium'>{producto.stock > 0 ? `  Quedan ${producto.stock} disponibles` : "Producto sin stock"}</p>
                 </div>              
               }
               <div className='w-full'>
