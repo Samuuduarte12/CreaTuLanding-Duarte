@@ -21,3 +21,14 @@
       transform: rotate(360deg);
     }
   } 
+
+  /* Cambia el color del fondo del toast*/
+.Toastify__toast{
+  background-color: #364153 !important;
+  color: white !important;
+}
+
+/* Cambia el color de la barrita del toast*/
+.Toastify__toast .Toastify__progress-bar {
+  background: #388da8 !important;
+}

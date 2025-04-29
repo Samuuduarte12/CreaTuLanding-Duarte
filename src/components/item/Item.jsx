@@ -1,24 +1,19 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../../context/context';
 import { Link } from 'react-router';
+import { toast } from 'react-toastify';
 
-function Item({ producto, onNotify}) {
+function Item({ producto}) {
   const {id, img, nombre, precio, stock } = producto;
-  const {agregarAlCarrito} = useAppContext()
-  const [loading, setLoading] = useState(false);
+  const {agregarAlCarrito} = useAppContext()  
 
-  const handleAgregar = () => {
-    setLoading(true);
-    setTimeout(() => {
-      if(stock > 0 ){
-        agregarAlCarrito(producto, 1);
-        setLoading(false);
-        onNotify('Producto agregado al carrito');
-      }else{
-        setLoading(false);
-        onNotify('Producto sin stock');
-      }
-    }, 800);
+  const handleAgregar = () => {        
+    if(stock > 0 ){
+      agregarAlCarrito(producto, 1);      
+      toast("Producto agregado al carrito");    
+    }else{      
+      toast('Producto sin stock');
+    }    
   };
 
   return (
@@ -50,16 +45,10 @@ function Item({ producto, onNotify}) {
 
         <div className='flex flex-col md:flex-row justify-center font-semibold gap-2 pb-2 py-1 px-2 md:p-0'>
         <button
-            onClick={handleAgregar}
-            disabled={loading}
-            className="text-[10px] md:w-full md:text-xs text-white bg-gray-700 hover:bg-[#388da8] md:px-2 inline-block md:py-1 rounded-md transition duration-300 cursor-pointer"
-          >
-            {loading ? 
-              <div>
-                <span className="loader2"></span>
-              </div> 
-            : 
-              'Agregar al carrito'}
+            onClick={handleAgregar}            
+            className="text-[10px] md:w-full md:text-xs text-white bg-gray-700 hover:bg-[#388da8] bggre md:px-2 inline-block md:py-1 rounded-md transition duration-300 cursor-pointer"
+          >            
+            Agregar al carrito
           </button>         
         </div>
       </div>      

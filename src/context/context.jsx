@@ -10,8 +10,7 @@ export const ContextProvider = (props) => {
   const [carrito , setCarrito] = useState([]);
   const [loading, setLoading] = useState(true);
   const [productos, setProductos] = useState(null);  
-  const [compraId, setCompraId] = useState(null);
-  const [notif, setNotif] = useState({ show: false, message: '' });
+  const [compraId, setCompraId] = useState(null);  
     
   function agregarAlCarrito (prod, cantidad) {
     const nuevoProducto = {
@@ -55,13 +54,6 @@ export const ContextProvider = (props) => {
     }
   },[compraId]);
     
-  const mensajeNotification = (msg) => {
-    setNotif({ show: true, message: msg });
-    setTimeout(() => {
-      setNotif({ show: false, message: '' });
-    }, 2000);
-  };
-
   function calcularTotalCarrito() {
     const total = carrito.reduce((acc, prod) => acc + prod.precio * prod.cantidad, 0);
     return total.toLocaleString('es-CL');
@@ -72,10 +64,12 @@ export const ContextProvider = (props) => {
     subTotal += carro.cantidad * carro.precio;
     return subTotal.toLocaleString('es-CL');
   }
-              
+
   return(
-    <AppContext.Provider value={{agregarAlCarrito, carrito, setCarrito, productos, loading, 
-      mensajeNotification, notif, setNotif, compraId, setCompraId, calcularTotalCarrito, calcularTotalPorProducto}}>
+    <AppContext.Provider value={{agregarAlCarrito, carrito, setCarrito, productos, loading,
+      compraId, setCompraId, calcularTotalCarrito, calcularTotalPorProducto
+    }}
+    >
       {props.children}
     </AppContext.Provider>
   )

@@ -8,7 +8,7 @@ function Navbar() {
 
   return (
     <div className='bg-white/75 flex items-center py-5 md:py-3  px-3 md:px-14 font-semibold fixed top-0 w-full z-10 backdrop-blur-sm shadow-md'>
-      <div className='w-1/4'>
+      <div className='w-1/4'>      
         <h1 className='text-md md:text-3xl font-bold text-[#388da8]' style={{fontFamily:'Righteous'}}>
           TrendyLooks
         </h1>
@@ -27,7 +27,7 @@ function Navbar() {
           </li>          
         </ul>
       </div>
-      
+       
       <div className='w-1/4 md:p-1 md:py-2 flex justify-end text-xl'>
         <Link to="/cart">
           <CartWidget/>

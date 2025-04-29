@@ -3,11 +3,10 @@ import { useParams } from 'react-router';
 import { useAppContext} from '../../context/context';
 import Spinner from '../spinner/Spinner';
 import Item from '../item/Item';
-import Notification from '../notification/Notification';
 
 function ItemListContainer({greeTings, greeTings2}) {
   const {categoria} = useParams();  
-  const {productos, loading, notif, mensajeNotification} = useAppContext();        
+  const {productos, loading} = useAppContext();    
     
   return (
     loading ? 
@@ -30,8 +29,7 @@ function ItemListContainer({greeTings, greeTings2}) {
             return (
               <Item
                 key={producto.id}
-                producto={producto}
-                onNotify={mensajeNotification}            
+                producto={producto}                       
               />
             )
           })
@@ -40,14 +38,12 @@ function ItemListContainer({greeTings, greeTings2}) {
             return (
               <Item
                 key={producto.id}
-                producto={producto}
-                onNotify={mensajeNotification}          
+                producto={producto}                   
               />
             )
           })
         }
-      </div>
-      <Notification message={notif.message} show={notif.show}/>
+      </div>      
     </div>
   )
 }

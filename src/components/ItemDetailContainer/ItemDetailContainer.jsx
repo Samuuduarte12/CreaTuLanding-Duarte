@@ -5,13 +5,12 @@ import Spinner from '../spinner/Spinner';
 import { IoArrowBackSharp } from "react-icons/io5";
 import ItemDetialImg from '../ItemDetailContainer/ItemDetialImg';
 import ItemCount from '../ItemCount/ItemCount';
-import Notification from '../notification/Notification';
+import { toast } from 'react-toastify';
 
 function ItemDetailContainer() {
   const {id} = useParams();  
-  const {agregarAlCarrito, productos, notif, mensajeNotification} = useAppContext();
-  const [loading, setLoading] = useState(true);
-  const [loadingNotify, setLoadingNotify] = useState(false);
+  const {agregarAlCarrito, productos} = useAppContext();
+  const [loading, setLoading] = useState(true);  
   const [mostrarCount, setMostrarCount] = useState(true);
   const [producto, setProducto] = useState(null);
   const [contador, setContador] = useState(1);
@@ -26,20 +25,15 @@ function ItemDetailContainer() {
     }
   }, [productos, id]);
 
-  const ocultarCount = (producto, contador) =>{
-    setLoadingNotify(true);
-    setTimeout(() => {
-      if (producto.stock > 0) {        
-        setMostrarCount(false);
-        agregarAlCarrito(producto, contador);
-        setLoadingNotify(false);
-        mensajeNotification('Producto agregado al carrito');
-      }else{
-        setLoadingNotify(false);
-        mensajeNotification('Producto sin stock');
-      }     
-    }, 800);
-  }  
+  const ocultarCount = (producto, contador) =>{        
+    if (producto.stock > 0) {        
+      setMostrarCount(false);
+      agregarAlCarrito(producto, contador);
+      toast(`Agregaste ${contador} productos al carrito`);
+    }else{        
+      toast('Producto sin stock');
+    }
+  }
   
   return (
     loading ? 
@@ -88,13 +82,10 @@ function ItemDetailContainer() {
               }
               <div className='w-full'>
                 <button         
-                  onClick={()=> ocultarCount(producto, contador)}
-                  disabled={loadingNotify}
-                  className={`text-white font-semibold w-full py-2 px-2 rounded-md transition duration-300 cursor-pointer 
-                    ${loadingNotify ? 'bg-gray-400': 'bg-gray-700 hover:bg-[#388da8]'}`
-                  }
+                  onClick={()=> ocultarCount(producto, contador)}                  
+                  className={`text-white font-semibold w-full py-2 px-2 rounded-md transition duration-300 cursor-pointer bg-gray-700 hover:bg-[#388da8]`}
                 >
-                  {loadingNotify ? 'Agregando...' : 'Agregar al carrito'}
+                  Agregar al carrito
                 </button>
               </div>
             </div>
@@ -104,8 +95,7 @@ function ItemDetailContainer() {
         <p className='flex justify-center items-center text-2xl font-semibold h-screen'>
           Producto con el id {id} no se a encontrado
         </p>
-      }
-      <Notification message={notif.message} show={notif.show}/>
+      }      
     </div>    
   )
 }
