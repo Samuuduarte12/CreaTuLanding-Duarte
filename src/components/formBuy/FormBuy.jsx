@@ -1,5 +1,4 @@
-// components/CompraModal.jsx
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import { addDoc, collection, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { useAppContext } from '../../context/context';

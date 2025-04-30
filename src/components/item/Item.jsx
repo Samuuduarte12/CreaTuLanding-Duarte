@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAppContext } from '../../context/context';
 import { Link } from 'react-router';
 import { toast } from 'react-toastify';

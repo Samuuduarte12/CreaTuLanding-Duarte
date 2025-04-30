@@ -18,8 +18,7 @@ export const ContextProvider = (props) => {
       cantidad,
     }
         
-    if(carrito.some(el => el.id === prod.id)){
-            
+    if(carrito.some(el => el.id === prod.id)){            
       const newCarrito = carrito.map(element => {
         if(element.id === prod.id){
           return {
