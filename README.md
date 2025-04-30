@@ -13,13 +13,14 @@
 - **React Toastify** para notificaciones
 - **CSS Loaders** para spinner de carga 
 - **Vercel** para despliegue
+
 ## Colores del proyecto
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
-| Color principal | ![#388da8](https://via.placeholder.com/10/0a192f?text=+) #388da8 |
-| Color secundario | ![#364153](https://via.placeholder.com/10/00b48a?text=+) #364153 |
-| Color terciario | ![#e5e7eb](https://via.placeholder.com/10/00b48a?text=+) #e5e7eb |
+| Color principal | #388da8 ![#388da8](https://img.shields.io/badge/-388da8?style=flat-square&logoColor=white) |
+| Color secundario | #364153 ![#364153](https://img.shields.io/badge/-364153?style=flat-square&logoColor=white) |
+| Color terciario | #e5e7eb ![#e5e7eb](https://img.shields.io/badge/-e5e7eb?style=flat-square&logoColor=white) |
 
 
 ## Componentes
