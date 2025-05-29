@@ -56,7 +56,7 @@ function ItemDetailContainer() {
             <ItemDetialImg img={producto.img}/>
           </div>
 
-          <div className='md:w-1/2 flex flex-col justify-between md:h-[500px]'>
+          <div className='md:w-1/2 flex flex-col justify-between md:h-[500px] transition-all'>
             <div className='text-center md:text-start'>
               <h1 style={{fontFamily:"Righteous"}} className='text-2xl md:text-5xl py-5 font-bold hidden md:block'>
                 {producto.nombre}
@@ -64,14 +64,14 @@ function ItemDetailContainer() {
               <p className='text-gray-400'>Categoria: {producto.categoria}</p>
               <h2 className='text-3xl py-3 md:py-5 font-medium text-[#388da8]'>${producto.precio.toLocaleString('es-CL')}</h2>
             </div>            
-            <h3 className='text-lg md:text-xl text-start py-2 border-b border-gray-300 font-medium'>
+            <h3 className='text-lg md:text-xl text-start py-2 border-b border-gray-300 font-medium transition-all'>
               Descripcion
             </h3>
 
             <p className='text-sm md:text-base font-normal md:pb-10 md:py-8 '>{producto.descripcion}</p>
-            <div className='flex flex-col items-start gap-5 py-5 md:px-2 border-t border-gray-200'>
+            <div className='flex flex-col items-start gap-5 py-5 md:px-2 border-t border-gray-200 transition-all'>
               {mostrarCount &&
-                <div className='flex gap-2 md:gap-10 items-center'>
+                <div className='flex gap-2 md:gap-10 items-center transition-all'>
                   <ItemCount
                     stock={producto.stock}
                     contador={contador}

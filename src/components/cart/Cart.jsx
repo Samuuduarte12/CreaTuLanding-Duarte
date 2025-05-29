@@ -102,7 +102,7 @@ function Cart() {
       </div>
     :
       <div className='flex flex-col justify-center items-center text-center text-gray-300 text-lg h-screen'>
-        <FaShoppingCart className='text-5xl md:text-8xl'/>
+        <FaShoppingCart className='text-5xl md:text-8xl wobble-hor-bottom'/>
         <h1 className='text-sx text-center px-5 md:px-0 md:text-2xl text-gray-700 font-bold m-5'>Tu carrito esta vacio</h1>
       </div>
   )

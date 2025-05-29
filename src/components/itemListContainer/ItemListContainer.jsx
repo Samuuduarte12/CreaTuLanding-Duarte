@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router';
 import { useAppContext} from '../../context/context';
 import Spinner from '../spinner/Spinner';
@@ -16,11 +15,11 @@ function ItemListContainer({greeTings, greeTings2}) {
     :
     <div className='bg-white min-h-screen text-center md:mt-10 md:p-5 relative'>
       <div className='py-20 font-bold'>
-        <h1 className='text-2xl md:text-5xl pt-4 pb-2 text-gray-700'>
+        <h1 className='text-2xl md:text-5xl pt-4 pb-2 text-gray-700 focus-in-contract-bck'>
           {greeTings}
           <span className='text-[#388da8]'>TrendyLooks</span>
         </h1>        
-        <p className='text-sx px-5 md:px-0 md:text-xl text-gray-500'>{greeTings2}</p>
+        <p className='text-sx px-5 md:px-0 md:text-xl text-gray-500 text-focus-in'>{greeTings2}</p>
       </div>
 
       <div className='grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 px-5 md:px-20 justify-center items-center relative'>
